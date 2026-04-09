@@ -426,7 +426,7 @@
                 $("#loading").show();
 
                 // 你的解析接口
-                axios.get("https://dsp.202597.xyz/short_videos/sv1.php?url=" + encodeURIComponent(url))
+                axios.get("https://api.bugpk.com/api/douyin?url=" + encodeURIComponent(url))
                 .then(function (t) {
                     if (t.data.code == 200 || t.data.url) {
                         var videoUrl = t.data.url;
