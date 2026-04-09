@@ -56,12 +56,10 @@ module.exports = {
   ],
 
   // 环境变量（在 EdgeOne 控制台中设置）
-  // 需要在 EdgeOne 控制台创建 EdgeKV 命名空间：
-  // - ANALYTICS: 用于存储访问统计数据
-  // - P2P_KV: 用于 P2P 文件传输的临时数据
+  // 需要在 EdgeOne 控制台创建一个 EdgeKV 命名空间：
+  // - TOOLS_KV: 用于存储所有工具数据（合并了 ANALYTICS 和 P2P_KV）
   env: {
-    // 这些变量需要在 EdgeOne 控制台中配置
-    // ANALYTICS: EdgeKV namespace
-    // P2P_KV: EdgeKV namespace
+    // 这个变量需要在 EdgeOne 控制台中配置
+    // TOOLS_KV: EdgeKV namespace
   }
 };

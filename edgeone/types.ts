@@ -11,9 +11,8 @@ export interface ToolAnalytics {
 // EdgeOne 环境变量类型
 // EdgeOne 使用 EdgeKV 或环境变量进行存储
 export interface EdgeOneEnv {
-  // EdgeOne EdgeKV 命名空间
-  ANALYTICS: EdgeKVNamespace;
-  P2P_KV: EdgeKVNamespace;
+  // EdgeOne EdgeKV 命名空间（合并了 ANALYTICS 和 P2P_KV）
+  TOOLS_KV: EdgeKVNamespace;
 }
 
 // EdgeOne EdgeKV 接口（与 Cloudflare KV 类似）

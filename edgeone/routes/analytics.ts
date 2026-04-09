@@ -3,6 +3,9 @@ import { type EdgeOneEnv, type AnalyticsData, type ToolAnalytics } from '../type
 
 const analytics = new Hono<{ Bindings: EdgeOneEnv }>();
 
+// 键前缀，避免与 P2P 数据冲突
+const ANALYTICS_PREFIX = 'analytics_';
+
 // 记录访问
 analytics.post('/api/analytics/track', async (c) => {
   try {
@@ -15,7 +18,7 @@ analytics.post('/api/analytics/track', async (c) => {
     const today = new Date().toISOString().split('T')[0];
 
     // 获取现有数据
-    const existingData = await c.env.ANALYTICS.get(toolName);
+    const existingData = await c.env.TOOLS_KV.get(`${ANALYTICS_PREFIX}${toolName}`);
     let analyticsData: AnalyticsData = existingData ? JSON.parse(existingData) : {
       totalVisits: 0,
       todayVisits: 0,
@@ -33,7 +36,7 @@ analytics.post('/api/analytics/track', async (c) => {
     analyticsData.todayVisits++;
 
     // 保存数据
-    await c.env.ANALYTICS.put(toolName, JSON.stringify(analyticsData));
+    await c.env.TOOLS_KV.put(`${ANALYTICS_PREFIX}${toolName}`, JSON.stringify(analyticsData));
 
     return c.json({ success: true });
   } catch (error) {
@@ -56,7 +59,7 @@ analytics.get('/api/analytics/stats', async (c) => {
       };
       
       // 获取特定工具的统计
-      const data = await c.env.ANALYTICS.get(toolName);
+      const data = await c.env.TOOLS_KV.get(`${ANALYTICS_PREFIX}${toolName}`);
       if (data) {
         analyticsData = JSON.parse(data);
       }
@@ -69,16 +72,18 @@ analytics.get('/api/analytics/stats', async (c) => {
       return c.json(analyticsData);
     } else {
       // 获取所有工具的统计
-      const keys = await c.env.ANALYTICS.list();
+      const keys = await c.env.TOOLS_KV.list({ prefix: ANALYTICS_PREFIX });
       const allStats: ToolAnalytics = {};
 
       for (const key of keys.keys) {
-        const data = await c.env.ANALYTICS.get(key.name);
+        // 去掉前缀，得到原始工具名
+        const toolName = key.name.replace(ANALYTICS_PREFIX, '');
+        const data = await c.env.TOOLS_KV.get(key.name);
         if (data) {
-          allStats[key.name] = JSON.parse(data);
-          if (allStats[key.name].lastResetDate !== today) {
-            allStats[key.name].todayVisits = 0;
-            allStats[key.name].lastResetDate = today;
+          allStats[toolName] = JSON.parse(data);
+          if (allStats[toolName].lastResetDate !== today) {
+            allStats[toolName].todayVisits = 0;
+            allStats[toolName].lastResetDate = today;
           }
         }
       }

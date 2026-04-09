@@ -28,18 +28,18 @@ app.post('/api/p2p/session', async (c) => {
   let code = generateCode();
   let attempts = 0;
   while (attempts < 5) {
-    const existing = await c.env.P2P_KV.get(`${PREFIX}offer_${code}`);
+    const existing = await c.env.TOOLS_KV.get(`${PREFIX}offer_${code}`);
     if (!existing) break;
     code = generateCode();
     attempts++;
   }
 
   // 存储 Offer
-  await c.env.P2P_KV.put(`${PREFIX}offer_${code}`, JSON.stringify(body.offer), { expirationTtl: TTL });
+  await c.env.TOOLS_KV.put(`${PREFIX}offer_${code}`, JSON.stringify(body.offer), { expirationTtl: TTL });
   
   // 初始化 ICE 候选列表
-  await c.env.P2P_KV.put(`${PREFIX}ice_offer_${code}`, JSON.stringify([]), { expirationTtl: TTL });
-  await c.env.P2P_KV.put(`${PREFIX}ice_answer_${code}`, JSON.stringify([]), { expirationTtl: TTL });
+  await c.env.TOOLS_KV.put(`${PREFIX}ice_offer_${code}`, JSON.stringify([]), { expirationTtl: TTL });
+  await c.env.TOOLS_KV.put(`${PREFIX}ice_answer_${code}`, JSON.stringify([]), { expirationTtl: TTL });
 
   return c.json({ code });
 });
@@ -50,7 +50,7 @@ app.post('/api/p2p/session', async (c) => {
  */
 app.get('/api/p2p/session/:code', async (c) => {
   const code = c.req.param('code');
-  const offer = await c.env.P2P_KV.get(`${PREFIX}offer_${code}`);
+  const offer = await c.env.TOOLS_KV.get(`${PREFIX}offer_${code}`);
   
   if (!offer) {
     return c.json({ error: 'Session not found' }, 404);
@@ -73,12 +73,12 @@ app.post('/api/p2p/answer/:code', async (c) => {
   }
 
   // 确保存储了 offer (即会话存在)
-  const offer = await c.env.P2P_KV.get(`${PREFIX}offer_${code}`);
+  const offer = await c.env.TOOLS_KV.get(`${PREFIX}offer_${code}`);
   if (!offer) {
     return c.json({ error: 'Session expired or invalid' }, 404);
   }
 
-  await c.env.P2P_KV.put(`${PREFIX}answer_${code}`, JSON.stringify(body.answer), { expirationTtl: TTL });
+  await c.env.TOOLS_KV.put(`${PREFIX}answer_${code}`, JSON.stringify(body.answer), { expirationTtl: TTL });
   return c.json({ success: true });
 });
 
@@ -88,7 +88,7 @@ app.post('/api/p2p/answer/:code', async (c) => {
  */
 app.get('/api/p2p/answer/:code', async (c) => {
   const code = c.req.param('code');
-  const answer = await c.env.P2P_KV.get(`${PREFIX}answer_${code}`);
+  const answer = await c.env.TOOLS_KV.get(`${PREFIX}answer_${code}`);
   
   if (!answer) {
     return c.json({ answer: null }); // 还没准备好
@@ -112,11 +112,11 @@ app.post('/api/p2p/ice/:code', async (c) => {
   const key = `${PREFIX}ice_${type}_${code}`;
   
   // 获取现有列表并追加
-  const existing = await c.env.P2P_KV.get(key);
+  const existing = await c.env.TOOLS_KV.get(key);
   const list = existing ? JSON.parse(existing) : [];
   list.push(candidate);
 
-  await c.env.P2P_KV.put(key, JSON.stringify(list), { expirationTtl: TTL });
+  await c.env.TOOLS_KV.put(key, JSON.stringify(list), { expirationTtl: TTL });
   return c.json({ success: true });
 });
 
@@ -133,7 +133,7 @@ app.get('/api/p2p/ice/:code', async (c) => {
   if (!type) return c.json({ error: 'Type required' }, 400);
 
   const key = `${PREFIX}ice_${type}_${code}`;
-  const existing = await c.env.P2P_KV.get(key);
+  const existing = await c.env.TOOLS_KV.get(key);
   const list = existing ? JSON.parse(existing) : [];
 
   // 只返回新的 candidates
@@ -161,7 +161,7 @@ app.delete('/api/p2p/session/:code', async (c) => {
   ];
 
   for (const key of keys) {
-    await c.env.P2P_KV.delete(key);
+    await c.env.TOOLS_KV.delete(key);
   }
 
   return c.json({ success: true });
