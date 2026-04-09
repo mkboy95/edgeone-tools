@@ -13,7 +13,7 @@ module.exports = {
     // 构建命令
     command: 'npm run build',
     // 构建输出目录
-    outputDir: 'dist',
+    outputDir: 'dist/client',
     // 开发框架（用于本地开发）
     framework: 'vite'
   },
