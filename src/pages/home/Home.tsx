@@ -1,4 +1,4 @@
-import { Card, Row, Col, Typography, Space, Statistic } from 'antd';
+import { Card, Row, Col, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
     CodeOutlined,
@@ -8,7 +8,6 @@ import {
     BgColorsOutlined,
     FileTextOutlined,
     LockOutlined,
-    EyeOutlined,
     RobotOutlined,
     EditOutlined,
     PictureOutlined,
