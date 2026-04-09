@@ -33,7 +33,7 @@ function Home() {
             title: 'Mini-Cover',
             description: '简洁的在线生成封面网站',
             icon: <PictureOutlined style={{ fontSize: '24px', color: '#1890ff' }} />,
-            path: '/mini-cover',
+            path: '/mini-cover/index.html',
             available: true
         },
         {
