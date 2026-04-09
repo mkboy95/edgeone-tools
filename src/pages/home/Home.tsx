@@ -37,10 +37,10 @@ function Home() {
             available: true
         },
         {
-            title: '自定义工具2',
-            description: '我的第二个自定义工具',
+            title: '短视频去水印',
+            description: '支持抖音、快手、小红书等100+短视频平台免费去水印',
             icon: <LinkOutlined style={{ fontSize: '24px', color: '#52c41a' }} />,
-            path: '/custom/tool2',
+            path: '/shortvideo',
             available: true
         },
         {
@@ -170,8 +170,8 @@ function Home() {
         const handleClick = () => {
             if (!tool.available) return;
             
-            // 对于 Mini-Cover 工具，使用 window.location.href 在当前页面打开
-            if (tool.path === '/mini-cover/index.html') {
+            // 对于 Mini-Cover 和短视频去水印工具，使用 window.location.href 在当前页面打开
+            if (tool.path === '/mini-cover/index.html' || tool.path === '/shortvideo') {
                 window.location.href = tool.path;
             } else {
                 navigate(tool.path);
