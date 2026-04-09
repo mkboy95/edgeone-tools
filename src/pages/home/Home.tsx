@@ -167,6 +167,17 @@ function Home() {
 
     // 渲染工具卡片
     const renderToolCard = (tool: any, index: number) => {
+        const handleClick = () => {
+            if (!tool.available) return;
+            
+            // 对于 Mini-Cover 工具，使用 window.open 打开
+            if (tool.path === '/mini-cover/index.html') {
+                window.open(tool.path, '_blank');
+            } else {
+                navigate(tool.path);
+            }
+        };
+        
         return (
             <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3} key={index}>
                 <Card
@@ -188,7 +199,7 @@ function Home() {
                             padding: '12px'
                         }
                     }}
-                    onClick={() => tool.available && navigate(tool.path)}
+                    onClick={handleClick}
                 >
                     <div>
                         <div style={{ marginBottom: '8px' }}>
