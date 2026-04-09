@@ -183,7 +183,7 @@ function Home() {
                 <Card
                     hoverable={tool.available}
                     style={{
-                        height: '130px',
+                        height: '120px',
                         textAlign: 'center',
                         opacity: tool.available ? 1 : 0.6,
                         cursor: tool.available ? 'pointer' : 'not-allowed',
@@ -194,22 +194,22 @@ function Home() {
                         body: {
                             display: 'flex',
                             flexDirection: 'column',
-                            justifyContent: 'space-between',
+                            justifyContent: 'flex-start',
                             height: '100%',
-                            padding: '8px'
+                            padding: '6px 8px 4px 8px'
                         }
                     }}
                     onClick={handleClick}
                 >
                     <div>
-                        <div style={{ marginBottom: '4px' }}>
+                        <div style={{ marginBottom: '2px' }}>
                             {tool.icon}
                         </div>
                         <Title level={5} style={{ margin: '2px 0', fontSize: '14px' }}>
                             {tool.title}
                             {!tool.available && <span style={{ color: '#999', fontSize: '10px', marginLeft: '4px' }}> (开发中)</span>}
                         </Title>
-                        <Paragraph style={{ margin: 0, color: '#666', fontSize: '11px' }}>
+                        <Paragraph style={{ margin: '2px 0 0 0', color: '#666', fontSize: '11px' }}>
                             {tool.description}
                         </Paragraph>
                     </div>
