@@ -32,28 +32,28 @@ function Home() {
         {
             title: '自定义工具1',
             description: '我的第一个自定义工具',
-            icon: <CodeOutlined style={{ fontSize: '20px', color: '#1890ff' }} />,
+            icon: <CodeOutlined style={{ fontSize: '24px', color: '#1890ff' }} />,
             path: '/custom/tool1',
             available: true
         },
         {
             title: '自定义工具2',
             description: '我的第二个自定义工具',
-            icon: <LinkOutlined style={{ fontSize: '20px', color: '#52c41a' }} />,
+            icon: <LinkOutlined style={{ fontSize: '24px', color: '#52c41a' }} />,
             path: '/custom/tool2',
             available: true
         },
         {
             title: '自定义工具3',
             description: '我的第三个自定义工具',
-            icon: <ClockCircleOutlined style={{ fontSize: '20px', color: '#fa8c16' }} />,
+            icon: <ClockCircleOutlined style={{ fontSize: '24px', color: '#fa8c16' }} />,
             path: '/custom/tool3',
             available: true
         },
         {
             title: '自定义工具4',
             description: '我的第四个自定义工具',
-            icon: <QrcodeOutlined style={{ fontSize: '20px', color: '#722ed1' }} />,
+            icon: <QrcodeOutlined style={{ fontSize: '24px', color: '#722ed1' }} />,
             path: '/custom/tool4',
             available: true
         }
@@ -249,20 +249,52 @@ function Home() {
 
     return (
         <div className="home-container" style={{ background: colorBgContainer }}>
-            <div style={{ marginBottom: '24px' }}>
+            <div style={{ marginBottom: '24px', width: '100%' }}>
                 {/* 自定义工具卡片区域 */}
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '16px',
+                    background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    width: '100%'
+                }}>
+                    <Title level={2} style={{
+                        color: 'white',
+                        margin: 0,
+                        fontSize: '20px',
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}>
+                        <CodeOutlined style={{ marginRight: '8px' }} />
+                        我的自定义工具
+                    </Title>
+                    <Paragraph style={{
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        fontSize: '14px',
+                        margin: '0 0 0 16px',
+                        flex: 1
+                    }}>
+                        个人定制工具，满足特定需求
+                    </Paragraph>
+                </div>
+
+                <div style={{
+                    borderBottom: '2px solid #e8e8e8',
+                    marginBottom: '16px',
+                    width: '100%'
+                }} />
+
                 <div style={{
                     background: 'white',
                     borderRadius: '8px',
                     padding: '16px',
                     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                    marginBottom: '16px'
+                    width: '100%'
                 }}>
-                    <Title level={4} style={{ marginBottom: '16px', color: '#1890ff' }}>
-                        我的自定义工具
-                    </Title>
                     <Row gutter={[16, 16]}>
-                        {customTools.map((tool, index) => renderCustomToolCard(tool, index))}
+                        {customTools.map((tool, index) => renderToolCard(tool, index))}
                     </Row>
                 </div>
             </div>
