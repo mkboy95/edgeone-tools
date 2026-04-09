@@ -207,45 +207,7 @@ function Home() {
         );
     };
 
-    // 渲染自定义工具卡片（顶部小卡片）
-    const renderCustomToolCard = (tool: any, index: number) => {
-        return (
-            <Col xs={12} sm={6} md={6} lg={4} xl={3} key={index}>
-                <Card
-                    hoverable={tool.available}
-                    style={{
-                        height: '120px',
-                        textAlign: 'center',
-                        opacity: tool.available ? 1 : 0.6,
-                        cursor: tool.available ? 'pointer' : 'not-allowed',
-                        transition: 'all 0.3s ease',
-                        marginBottom: '16px'
-                    }}
-                    styles={{
-                        body: {
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            height: '100%',
-                            padding: '12px'
-                        }
-                    }}
-                    onClick={() => tool.available && navigate(tool.path)}
-                >
-                    <div style={{ marginBottom: '8px' }}>
-                        {tool.icon}
-                    </div>
-                    <Title level={5} style={{ margin: '4px 0', fontSize: '14px' }}>
-                        {tool.title}
-                        {!tool.available && <span style={{ color: '#999', fontSize: '10px', marginLeft: '4px' }}> (开发中)</span>}
-                    </Title>
-                    <Paragraph style={{ margin: 0, color: '#666', fontSize: '11px' }}>
-                        {tool.description}
-                    </Paragraph>
-                </Card>
-            </Col>
-        );
-    };
+
 
     return (
         <div className="home-container" style={{ background: colorBgContainer }}>
