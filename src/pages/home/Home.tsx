@@ -30,10 +30,10 @@ function Home() {
     // 自定义工具集
     const customTools = [
         {
-            title: '自定义工具1',
-            description: '我的第一个自定义工具',
-            icon: <CodeOutlined style={{ fontSize: '24px', color: '#1890ff' }} />,
-            path: '/custom/tool1',
+            title: 'Mini-Cover',
+            description: '简洁的在线生成封面网站',
+            icon: <PictureOutlined style={{ fontSize: '24px', color: '#1890ff' }} />,
+            path: '/mini-cover',
             available: true
         },
         {
