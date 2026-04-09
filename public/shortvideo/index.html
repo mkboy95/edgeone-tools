@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>短视频去水印</title>
-
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
         .header {
             background-color: #4CAF50;
             color: white;
@@ -39,6 +48,215 @@
             background-color: #2196F3;
             color: white;
         }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .feature {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+            max-width: 200px;
+        }
+        .feature i {
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .feature p {
+            font-size: 14px;
+            color: #666;
+        }
+        .input-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .input-box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .input-box input {
+            width: 400px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .input-box button {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .input-box button:hover {
+            background-color: #45a049;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .platforms {
+            margin-bottom: 40px;
+        }
+        .platforms h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .platform-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .platform-item i {
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        .platform-item h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .platform-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        .tutorial {
+            margin-bottom: 40px;
+        }
+        .tutorial h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .tutorial-steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .tutorial-step {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+            max-width: 300px;
+            text-align: center;
+        }
+        .tutorial-step .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            line-height: 30px;
+            margin-bottom: 10px;
+        }
+        .tutorial-step h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .tutorial-step p {
+            font-size: 14px;
+            color: #666;
+        }
+        .faq {
+            margin-bottom: 40px;
+        }
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .faq-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        .faq-item h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .faq-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 8px;
+        }
+        .video-box {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .video-box video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .download-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -52,25 +270,148 @@
         </div>
     </div>
     <div class="container">
-        <div class="card">
-            <h1>短视频去水印</h1>
-            <div class="input-box">
-                <input type="text" id="video_url" placeholder="请输入视频链接">
-                <button id="submit"><i class="fa-solid fa-play"></i> 解析视频</button>
-            </div>
-            <div class="video-box" id="video_show_box" style="display: none;">
-                <video id="video_show" src="" controls crossorigin="anonymous"></video>
-                <button id="downloadVideo" class="download-btn"><i class="fa-solid fa-download"></i> 保存视频</button>
-            </div>
-            <div class="footer">
-                仅供学习交流使用
+        <div class="hero">
+            <h1>轻松解析任何短视频</h1>
+            <p>从抖音、快手、B站等各大平台一键解析无水印视频，简单易用，完全免费</p>
+            <div class="features">
+                <div class="feature">
+                    <i class="fa-solid fa-tint-slash"></i>
+                    <h3>无水印</h3>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>高速解析</h3>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                    <h3>完全免费</h3>
+                </div>
             </div>
         </div>
+        <div class="input-section">
+            <div class="input-box">
+                <input type="text" id="video_url" placeholder="请输入视频链接">
+                <button id="submit"><i class="fa-solid fa-play"></i> 开始解析</button>
+            </div>
+            <div class="loading" id="loading">
+                <p>正在解析视频... 请稍候，这可能需要几秒钟时间</p>
+            </div>
+            <div class="video-box" id="video_show_box">
+                <video id="video_show" src="" controls crossorigin="anonymous"></video>
+                <button id="downloadVideo" class="download-btn"><i class="fa-solid fa-download"></i> 下载无水印视频</button>
+            </div>
+        </div>
+        <div class="platforms">
+            <h2>支持的平台</h2>
+            <div class="platform-grid">
+                <div class="platform-item">
+                    <i class="fa-solid fa-music"></i>
+                    <h3>抖音</h3>
+                    <p>解析抖音无水印视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-video"></i>
+                    <h3>快手</h3>
+                    <p>解析快手无水印视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-play"></i>
+                    <h3>B站</h3>
+                    <p>解析B站视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-book"></i>
+                    <h3>小红书</h3>
+                    <p>解析小红书视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-comment"></i>
+                    <h3>微博</h3>
+                    <p>解析微博短视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-eye"></i>
+                    <h3>微视</h3>
+                    <p>解析微视短视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-shrimp"></i>
+                    <h3>皮皮虾</h3>
+                    <p>解析皮皮虾视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-face-laugh"></i>
+                    <h3>皮皮搞笑</h3>
+                    <p>解析搞笑短视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-watermelon"></i>
+                    <h3>西瓜视频</h3>
+                    <p>解析西瓜短视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                    <h3>好看视频</h3>
+                    <p>解析百度系短视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <h3>最右</h3>
+                    <p>解析最右短视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-fire"></i>
+                    <h3>火山小视频</h3>
+                    <p>解析火山平台视频</p>
+                </div>
+                <div class="platform-item">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <h3>更多平台</h3>
+                    <p>持续更新中...</p>
+                </div>
+            </div>
+        </div>
+        <div class="tutorial">
+            <h2>使用教程</h2>
+            <div class="tutorial-steps">
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <h3>复制视频链接</h3>
+                    <p>打开抖音、快手等平台，找到想要下载的视频，点击分享按钮，选择"复制链接"</p>
+                </div>
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <h3>粘贴链接</h3>
+                    <p>回到本页面，将复制的链接粘贴到上方的输入框中</p>
+                </div>
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <h3>下载视频</h3>
+                    <p>点击"开始解析"按钮，解析完成后点击"下载无水印视频"按钮即可</p>
+                </div>
+            </div>
+        </div>
+        <div class="faq">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>为什么有些视频无法解析？</h3>
+                <p>有些平台可能会更新其防爬机制，导致暂时无法解析。我们会尽快更新解析算法。此外，部分受版权保护的视频可能无法解析。</p>
+            </div>
+            <div class="faq-item">
+                <h3>为什么下载的视频仍然带有水印？</h3>
+                <p>如果下载的视频仍然带有水印，可能是因为该平台的水印去除算法需要更新。请联系我们，我们会尽快处理。</p>
+            </div>
+            <div class="faq-item">
+                <h3>使用该工具需要付费吗？</h3>
+                <p>我们的服务完全免费，不收取任何费用。请警惕其他声称可以提供更高级解析服务的付费网站。</p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>仅供学习交流使用</p>
+        </div>
     </div>
-
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.4.0/axios.min.js"></script>
-    <script src="main.js"></script>
     <script>
         $(function () {
             // 解析视频（使用你自己的接口）
@@ -82,6 +423,7 @@
                 }
                 var e = this;
                 e.disabled = !0, $(e).html("<i class='fa-solid fa-spinner fa-spin'></i> 解析中...");
+                $("#loading").show();
 
                 // 你的解析接口
                 axios.get("https://dsp.202597.xyz/short_videos/sv1.php?url=" + encodeURIComponent(url))
@@ -99,7 +441,8 @@
                     console.log(t);
                     alert("解析失败：接口返回403，服务器拒绝访问");
                 }).finally(function () {
-                    e.disabled = !1, $(e).html("<i class='fa-solid fa-play'></i> 解析视频");
+                    e.disabled = !1, $(e).html("<i class='fa-solid fa-play'></i> 开始解析");
+                    $("#loading").hide();
                 });
             });
 
