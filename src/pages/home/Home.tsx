@@ -170,9 +170,9 @@ function Home() {
         const handleClick = () => {
             if (!tool.available) return;
             
-            // 对于 Mini-Cover 工具，使用 window.open 打开
+            // 对于 Mini-Cover 工具，使用 window.location.href 在当前页面打开
             if (tool.path === '/mini-cover/index.html') {
-                window.open(tool.path, '_blank');
+                window.location.href = tool.path;
             } else {
                 navigate(tool.path);
             }
