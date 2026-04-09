@@ -1,4 +1,4 @@
-import { Card, Row, Col, Typography, Space, Statistic } from 'antd';
+import { Card, Row, Col, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
     CodeOutlined,
@@ -8,7 +8,6 @@ import {
     BgColorsOutlined,
     FileTextOutlined,
     LockOutlined,
-    EyeOutlined,
     RobotOutlined,
     EditOutlined,
     PictureOutlined,
@@ -19,7 +18,6 @@ import {
     SwapOutlined
 } from '@ant-design/icons';
 import { theme } from 'antd';
-import { useSiteStats } from '../../hooks/useAnalytics';
 import './Home.css';
 
 const { Title, Paragraph } = Typography;
@@ -27,7 +25,6 @@ const { Title, Paragraph } = Typography;
 function Home() {
     const navigate = useNavigate();
     const { token: { colorBgContainer } } = theme.useToken();
-    const { stats: siteStats, loading: statsLoading } = useSiteStats();
 
     // 开发者工具集
     const devTools = [
@@ -135,17 +132,10 @@ function Home() {
         }
     ];
 
-    // 获取工具的访问统计
-    const getToolStats = (toolTitle: string) => {
-        if (statsLoading || !siteStats.tools) {
-            return { totalVisits: 0, todayVisits: 0 };
-        }
-        return siteStats.tools[toolTitle] || { totalVisits: 0, todayVisits: 0 };
-    };
+    // 工具统计功能已移除
 
     // 渲染工具卡片
     const renderToolCard = (tool: any, index: number) => {
-        const toolStats = getToolStats(tool.title);
         return (
             <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3} key={index}>
                 <Card
@@ -182,15 +172,7 @@ function Home() {
                         </Paragraph>
                     </div>
 
-                    {/* 访问统计信息 */}
-                    {tool.available && !statsLoading && (
-                        <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #f0f0f0' }}>
-                            <Space size="small" style={{ fontSize: '10px', color: '#999' }}>
-                                <span>总: {toolStats.totalVisits}</span>
-                                <span>今: {toolStats.todayVisits}</span>
-                            </Space>
-                        </div>
-                    )}
+                    {/* 访问统计信息已移除 */}
                 </Card>
             </Col>
         );
@@ -199,27 +181,7 @@ function Home() {
     return (
         <div className="home-container" style={{ background: colorBgContainer }}>
             <div style={{ textAlign: 'center', marginBottom: '5px' }}>
-                {/* 网站总体统计信息 */}
-                {!statsLoading && (
-                    <div style={{ marginTop: '8px' }}>
-                        <Space size="middle">
-                            <Statistic
-                                title="总访问次数"
-                                value={siteStats.siteTotal}
-                                prefix={<EyeOutlined />}
-                                valueStyle={{ color: '#1890ff', fontSize: '20px' }}
-                                style={{ fontSize: '12px' }}
-                            />
-                            <Statistic
-                                title="今日访问"
-                                value={siteStats.siteToday}
-                                prefix={<EyeOutlined />}
-                                valueStyle={{ color: '#52c41a', fontSize: '20px' }}
-                                style={{ fontSize: '12px' }}
-                            />
-                        </Space>
-                    </div>
-                )}
+                {/* 网站总体统计信息已移除 */}
             </div>
 
             {/* 开发者工具集区域 */}
